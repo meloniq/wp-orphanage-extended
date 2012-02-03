@@ -1,0 +1,81 @@
+# Copyright (C) 2012 MELONIQ.NET
+# This file is distributed under the same license as the WP-Orphanage Extended package.
+msgid ""
+msgstr ""
+"Project-Id-Version: WP-Orphanage Extended 1.0\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-orphanage-extended\n"
+"POT-Creation-Date: 2012-01-29 20:14:48+00:00\n"
+"PO-Revision-Date: 2012-01-29 21:54+0100\n"
+"Last-Translator: MELONIQ.NET <biuro@meloniq.net>\n"
+"Language-Team: http://www.meloniq.net\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Polish\n"
+"X-Poedit-Country: POLAND\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: wp-orphanage-extended-options.php:3
+msgid "You do not have sufficient permissions to access this page"
+msgstr "Nie masz wystarczających uprawnień aby otworzyć tą stronę"
+
+#: wp-orphanage-extended-options.php:18
+msgid "Settings updated. "
+msgstr "Ustawienia zapisane. "
+
+#: wp-orphanage-extended-options.php:29
+#: wp-orphanage-extended.php:56
+msgid "WP Orphanage Extended"
+msgstr "WP Orphanage Extended"
+
+#: wp-orphanage-extended-options.php:37
+msgid "Choose Default Role:"
+msgstr "Wybierz domyślną rolę:"
+
+#: wp-orphanage-extended-options.php:46
+msgid "Choose the default role orphan users should be promoted to (if no role to copy from other table was found)."
+msgstr "Wybierz domyślną role która powinna zostać przypisana użytkownikom sierotom (jeśli brak roli do skopiowania z innej tabeli)."
+
+#: wp-orphanage-extended-options.php:51
+msgid "Add WP Prefixes:"
+msgstr "Dodaj prefiksy WP:"
+
+#: wp-orphanage-extended-options.php:56
+msgid "Prefix"
+msgstr "Prefiks"
+
+#: wp-orphanage-extended-options.php:60
+msgid "Add new:"
+msgstr "Dodaj nowy:"
+
+#: wp-orphanage-extended-options.php:61
+msgid "Add prefixes of all WP installs where to search for user role. To remove field, leave it empty. Default WP prefix is <code>wp_</code> "
+msgstr "Dodaj prefiksy wszystkich instalacji WP gdzie szukać roli użytkownika. Aby usunąć pole, pozostaw je puste. Domyślny prefiks WP to <code>wp_</code> "
+
+#: wp-orphanage-extended-options.php:68
+msgid "Save Changes"
+msgstr "Zapisz zmiany"
+
+#. Plugin Name of the plugin/theme
+msgid "WP-Orphanage Extended"
+msgstr "WP-Orphanage Extended"
+
+#. Plugin URI of the plugin/theme
+msgid "http://blog.meloniq.net/2012/01/29/wp-orphanage-extended/"
+msgstr "http://blog.meloniq.net/2012/01/29/wp-orphanage-extended/"
+
+#. Description of the plugin/theme
+msgid "Plugin to promote users with no roles set (the orphans) to the role from other blog where they registered or to default if any found."
+msgstr "Wtyczka do promowania użytkowników bez określonej roli (sieroty), do roli z innych blogów w których się rejestrowali, lub domyślnej jeśli nie znaleziono."
+
+#. Author of the plugin/theme
+msgid "MELONIQ.NET"
+msgstr "MELONIQ.NET"
+
+#. Author URI of the plugin/theme
+msgid "http://meloniq.net/"
+msgstr "http://meloniq.net/"
+
