@@ -8,22 +8,31 @@
 	Author URI: http://meloniq.net/
 */
 
-// Init options & tables during activation & deregister init option
+
+/**
+ * Avoid calling file directly
+ */
+if ( ! function_exists( 'add_action' ) )
+	die( 'Whoops! You shouldn\'t be doing that.' );
+
+
+/**
+ * Plugin version and textdomain constants
+ */
+define( 'WPOEX_VERSION', '1.0' );
+define( 'WPOEX_TD', 'wp-orphanage-extended' );
+
+
+/**
+ * Process actions on plugin activation
+ */
 register_activation_hook( plugin_basename( __FILE__ ), 'wporphanageex_activate' );
 
 
 /**
  * Load Text-Domain
  */
-load_plugin_textdomain( 'wporphanageex', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
-
-
-/**
- * Initialize admin menu
- */
-if ( is_admin() ) {
-	add_action( 'admin_menu', 'add_wporphanageex_options_page' );
-}
+load_plugin_textdomain( WPOEX_TD, false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
 
 /**
@@ -50,8 +59,9 @@ function wporphanageex_activate() {
  */
 function add_wporphanageex_options_page() {
 
-	add_options_page( __( 'WP Orphanage Extended', 'wporphanageex' ), __( 'WP Orphanage Extended', 'wporphanageex' ), 'administrator', 'wp-orphanage-extended', 'wporphanageex_menu_settings' );
+	add_options_page( __( 'WP Orphanage Extended', WPOEX_TD ), __( 'WP Orphanage Extended', WPOEX_TD ), 'administrator', 'wp-orphanage-extended', 'wporphanageex_menu_settings' );
 }
+add_action( 'admin_menu', 'add_wporphanageex_options_page' );
 
 
 /**

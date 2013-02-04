@@ -40,7 +40,11 @@ If you are using the ``CUSTOM_USER_TABLE`` and ``CUSTOM_USER_META_TABLE`` in you
 
 == Changelog ==
 
+= 1.1 =
+* Changed textdomain to 'wp-orphanage-extended', represented by constant WPOEX_TD
+
 = 1.0 = 
-Initial release.
+* Initial release.
+
 This plugin is a extended version of WP-Orphanage plugin written by Eric Marden (xentek.net)
 
