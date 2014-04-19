@@ -3,7 +3,7 @@ Contributors: meloniq
 Donate link: http://blog.meloniq.net/donate/
 Tags: users, shared user table, CUSTOM_USER_TABLE, CUSTOM_USER_META_TABLE
 Requires at least: 3.3
-Tested up to: 3.5.1
+Tested up to: 3.9
 Stable tag: 1.0
 
 Plugin to promote users with no roles set (the orphans) to the role from other blog where they registered or to default if any found.
