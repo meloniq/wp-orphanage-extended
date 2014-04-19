@@ -4,7 +4,7 @@
 	Plugin URI: http://blog.meloniq.net/2012/01/29/wp-orphanage-extended/
 	Description: Plugin to promote users with no roles set (the orphans) to the role from other blog where they registered or to default if any found.
 	Author: MELONIQ.NET
-	Version: 1.0
+	Version: 1.1
 	Author URI: http://meloniq.net/
 */
 
@@ -12,14 +12,15 @@
 /**
  * Avoid calling file directly
  */
-if ( ! function_exists( 'add_action' ) )
+if ( ! function_exists( 'add_action' ) ) {
 	die( 'Whoops! You shouldn\'t be doing that.' );
+}
 
 
 /**
  * Plugin version and textdomain constants
  */
-define( 'WPOEX_VERSION', '1.0' );
+define( 'WPOEX_VERSION', '1.1' );
 define( 'WPOEX_TD', 'wp-orphanage-extended' );
 
 
@@ -39,17 +40,21 @@ load_plugin_textdomain( WPOEX_TD, false, dirname( plugin_basename( __FILE__ ) ) 
  * Action on plugin activate
  */
 function wporphanageex_activate() {
+	global $wpdb;
+
 	// set default role if not exist
-	if ( ! get_option('wporphanageex_role') && get_option('default_role') )
+	if ( ! get_option( 'wporphanageex_role' ) && get_option( 'default_role' ) ) {
 		update_option( 'wporphanageex_role', get_option('default_role') );
-	else
+	} else {
 		update_option( 'wporphanageex_role', 'subscriber' );
+	}
 
 	// set default prefix if not exist
 	$prefixes = array();
 	$prefixes[] = $wpdb->prefix;
-	if ( ! get_option('wporphanageex_prefixes') )
+	if ( ! get_option( 'wporphanageex_prefixes' ) ) {
 		update_option( 'wporphanageex_prefixes', $prefixes );
+	}
 
 }
 
@@ -72,6 +77,13 @@ function wporphanageex_menu_settings() {
 }
 
 
+/**
+ * Adopts orphaned user
+ *
+ * @param string $login
+ *
+ * @return void
+ */
 function wporphanageex_adopt_this_orphan( $login ) {
   $user = get_user_by( 'login', $login );
 
@@ -83,6 +95,11 @@ function wporphanageex_adopt_this_orphan( $login ) {
 add_action( 'wp_login', 'wporphanageex_adopt_this_orphan' ); 
 
 
+/**
+ * Adopts all orphaned users
+ *
+ * @return void
+ */
 function wporphanageex_adopt_all_orphans() {
 	foreach ( wporphanageex_get_all_users() as $user_id ) {
 		$user = new WP_User( $user_id );
@@ -94,41 +111,61 @@ function wporphanageex_adopt_all_orphans() {
 add_action( 'load-users.php', 'wporphanageex_adopt_all_orphans' );
 
 
+/**
+ * Returns an array of user roles
+ *
+ * @return array
+ */
 function wporphanageex_get_roles() {
 	global $wpdb;
+
 	$option = $wpdb->prefix . 'user_roles';
 	return get_option( $option );
 }
 
 
+/**
+ * Returns an array of user IDs
+ *
+ * @return array
+ */
 function wporphanageex_get_all_users() {
 	global $wpdb;
+
 	$results = $wpdb->get_col( "SELECT ID FROM $wpdb->users" );
 	return $results;
 }
 
 
+/**
+ * Searching other blogs and returns a user role, if not found, returns default one
+ *
+ * @param int $user_id (optional)
+ *
+ * @return string
+ */
 function wporphanageex_search_user_role( $user_id = false ) {
 	global $wpdb, $current_user;
-	$current_user = wp_get_current_user();
-	if ( ! $user_id )
-		$user_id = $current_user->ID;
 
-	$prefixes = get_option('wporphanageex_prefixes');
+	$current_user = wp_get_current_user();
+	if ( ! $user_id ) {
+		$user_id = $current_user->ID;
+	}
+
+	$prefixes = get_option( 'wporphanageex_prefixes' );
 	if ( $prefixes && is_array( $prefixes ) ) {
 		foreach ( $prefixes as $prefix ) {
 			$role = get_user_meta( $user_id, $prefix . 'capabilities', true );
 			if ( $role != '' && is_array( $role ) ) {
-				foreach ( $role as $key => $value )
+				foreach ( $role as $key => $value ) {
 					return $key;
+				}
 			}
 		}
 	}
 
 	// if no one was found, return default role
-	$default = get_option('wporphanageex_role');
+	$default = get_option( 'wporphanageex_role' );
 	return $default;
 }
-
-
 
