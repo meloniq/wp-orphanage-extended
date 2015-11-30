@@ -1,16 +1,20 @@
 <?php
 /*
-	Plugin Name: WP-Orphanage Extended
-	Plugin URI: http://blog.meloniq.net/2012/01/29/wp-orphanage-extended/
-	Description: Plugin to promote users with no roles set (the orphans) to the role from other blog where they registered or to default if any found.
-	Author: MELONIQ.NET
-	Version: 1.1
-	Author URI: http://meloniq.net/
+Plugin Name: WP-Orphanage Extended
+Plugin URI: http://blog.meloniq.net/2012/01/29/wp-orphanage-extended/
+Description: Plugin to promote users with no roles set (the orphans) to the role from other blog where they registered or to default if any found.
+
+Version: 1.1
+
+Author: MELONIQ.NET
+Author URI: http://meloniq.net/
+Text Domain: wp-orphanage-extended
+Domain Path: /languages
 */
 
 
 /**
- * Avoid calling file directly
+ * Avoid calling file directly.
  */
 if ( ! function_exists( 'add_action' ) ) {
 	die( 'Whoops! You shouldn\'t be doing that.' );
@@ -18,33 +22,35 @@ if ( ! function_exists( 'add_action' ) ) {
 
 
 /**
- * Plugin version and textdomain constants
+ * Plugin version and textdomain constants.
  */
 define( 'WPOEX_VERSION', '1.1' );
 define( 'WPOEX_TD', 'wp-orphanage-extended' );
 
 
 /**
- * Process actions on plugin activation
+ * Process actions on plugin activation.
  */
 register_activation_hook( plugin_basename( __FILE__ ), 'wporphanageex_activate' );
 
 
 /**
- * Load Text-Domain
+ * Load Text-Domain.
  */
 load_plugin_textdomain( WPOEX_TD, false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
 
 /**
- * Action on plugin activate
+ * Action on plugin activate.
+ *
+ * @return void
  */
 function wporphanageex_activate() {
 	global $wpdb;
 
 	// set default role if not exist
 	if ( ! get_option( 'wporphanageex_role' ) && get_option( 'default_role' ) ) {
-		update_option( 'wporphanageex_role', get_option('default_role') );
+		update_option( 'wporphanageex_role', get_option( 'default_role' ) );
 	} else {
 		update_option( 'wporphanageex_role', 'subscriber' );
 	}
@@ -60,7 +66,9 @@ function wporphanageex_activate() {
 
 
 /**
- * Populate administration menu of the plugin
+ * Populate administration menu of the plugin.
+ *
+ * @return void
  */
 function add_wporphanageex_options_page() {
 
@@ -70,7 +78,9 @@ add_action( 'admin_menu', 'add_wporphanageex_options_page' );
 
 
 /**
- * Create settings page in admin
+ * Create settings page in admin.
+ *
+ * @return void
  */
 function wporphanageex_menu_settings() {
 	include_once( dirname( __FILE__ ) . '/wp-orphanage-extended-options.php' );
@@ -78,7 +88,7 @@ function wporphanageex_menu_settings() {
 
 
 /**
- * Adopts orphaned user
+ * Adopts orphaned user.
  *
  * @param string $login
  *
@@ -96,7 +106,7 @@ add_action( 'wp_login', 'wporphanageex_adopt_this_orphan' );
 
 
 /**
- * Adopts all orphaned users
+ * Adopts all orphaned users.
  *
  * @return void
  */
@@ -112,7 +122,7 @@ add_action( 'load-users.php', 'wporphanageex_adopt_all_orphans' );
 
 
 /**
- * Returns an array of user roles
+ * Returns an array of user roles.
  *
  * @return array
  */
@@ -125,7 +135,7 @@ function wporphanageex_get_roles() {
 
 
 /**
- * Returns an array of user IDs
+ * Returns an array of user IDs.
  *
  * @return array
  */
@@ -138,7 +148,7 @@ function wporphanageex_get_all_users() {
 
 
 /**
- * Searching other blogs and returns a user role, if not found, returns default one
+ * Searching other blogs and returns a user role, if not found, returns default one.
  *
  * @param int $user_id (optional)
  *
