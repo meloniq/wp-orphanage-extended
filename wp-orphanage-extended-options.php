@@ -11,7 +11,7 @@
 			$prefixes = array();
 			foreach ( $_POST['wporphanageex_prefixes'] as $prefix ) {
 				if ( ! empty( $prefix ) ) {
-					$prefixes[] = $prefix;
+					$prefixes[] = wp_kses_data( $prefix );
 				}
 			}
 
@@ -27,8 +27,7 @@ $prefixes = get_option( 'wporphanageex_prefixes' );
 
 ?>
 <div class="wrap">
-	<?php screen_icon(); ?>
-	<h2><?php _e( 'WP Orphanage Extended', WPOEX_TD ); ?></h2>
+	<h1><?php _e( 'WP Orphanage Extended', WPOEX_TD ); ?></h1>
 
 	<form method="post" action="" id="wporphanageex-settings">
 		<input type="hidden" name="action" value="update" />
@@ -40,7 +39,7 @@ $prefixes = get_option( 'wporphanageex_prefixes' );
 					<select name="wporphanageex_role" id="wporphanageex_role">
 						<?php if ( $roles ) : ?>
 							<?php foreach ( $roles as $role => $value ) : ?>
-								<option value="<?php echo $role; ?>" <?php selected( $wp_orphanageex_role, $role ); ?>><?php echo ucfirst( $role ); ?></option>
+								<option value="<?php echo esc_attr( $role ); ?>" <?php selected( $wp_orphanageex_role, $role ); ?>><?php echo esc_html( ucfirst( $role ) ); ?></option>
 							<?php endforeach; ?>
 						<?php endif; ?>
 					</select><br />
@@ -53,7 +52,7 @@ $prefixes = get_option( 'wporphanageex_prefixes' );
 					<?php if ( $prefixes ) : ?>
 						<?php $i = 1; ?>
 						<?php foreach ( $prefixes as $prefix ) : ?>
-							<?php _e( 'Prefix', WPOEX_TD ); ?> <?php echo $i; ?>: <input name="wporphanageex_prefixes[]" id="wporphanageex_prefixes_<?php echo $i; ?>" class="regular-text" type="text" value="<?php echo $prefix; ?>" /><br />
+							<?php _e( 'Prefix', WPOEX_TD ); ?> <?php echo $i; ?>: <input name="wporphanageex_prefixes[]" id="wporphanageex_prefixes_<?php echo $i; ?>" class="regular-text" type="text" value="<?php echo esc_attr( $prefix ); ?>" /><br />
 							<?php $i++; ?>
 						<?php endforeach; ?>
 					<?php endif; ?>

@@ -1,16 +1,19 @@
 === WP-Orphanage Extended ===
 Contributors: meloniq
-Donate link: http://blog.meloniq.net/donate/
+Donate link: https://blog.meloniq.net/donate/
 Tags: users, shared user table, CUSTOM_USER_TABLE, CUSTOM_USER_META_TABLE
-Requires at least: 4.0
-Tested up to: 4.3.1
-Stable tag: 1.1
+Requires at least: 4.9
+Tested up to: 5.7
+Stable tag: 1.2
 
 Plugin to promote users with no roles set (the orphans) to the role from other blog where they registered or to default if any found.
 
 == Description ==
 
-Users who have not been assigned any Roles or Capabilities are called 'orphans'. When using the [shared users table trick](http://xentek.net/articles/528/implementing-the-wordpress-shared-users-table-trick/) to link up multiple WordPress installations, users who register on one of your blogs, are not given any privileges on the other blogs in the network. WP-Orphanage is a plugin that automatically adopts your orphan users by promoting them to the role of your choosing. By default it is the same as the default role set in the WP Options.
+Users who have not been assigned any Roles or Capabilities are called 'orphans'. 
+When using the [shared users table trick](https://web.archive.org/web/20160226091450/http://xentek.net/articles/528/implementing-the-wordpress-shared-users-table-trick/) to link up multiple WordPress installations, users who register on one of your blogs, are not given any privileges on the other blogs in the network. 
+WP-Orphanage is a plugin that automatically adopts your orphan users by promoting them to the role of your choosing. 
+By default it is the same as the default role set in the WP Options.
 
 It does it in two ways:
 
@@ -32,13 +35,16 @@ This plugin is a extended version of WP-Orphanage plugin written by Eric Marden
 
 = Why Would I Want This? =
 
-If you are using the ``CUSTOM_USER_TABLE`` and ``CUSTOM_USER_META_TABLE`` in your [wp-config.php](http://codex.wordpress.org/Editing_wp-config.php#Custom_User_and_Usermeta_Tables), you're probably going to want this.
+If you are using the ``CUSTOM_USER_TABLE`` and ``CUSTOM_USER_META_TABLE`` in your [wp-config.php](https://wordpress.org/support/article/editing-wp-config-php/#custom-user-and-usermeta-tables), you're probably going to want this.
 
 == Screenshots ==
 
 1. WP-Orphanage Extended Options Screen
 
 == Changelog ==
+
+= 1.2 =
+* Escaped data on settings page
 
 = 1.1 =
 * Changed textdomain to 'wp-orphanage-extended', represented by constant WPOEX_TD

@@ -1,13 +1,13 @@
 <?php
 /*
 Plugin Name: WP-Orphanage Extended
-Plugin URI: http://blog.meloniq.net/2012/01/29/wp-orphanage-extended/
+Plugin URI: https://blog.meloniq.net/2012/01/29/wp-orphanage-extended/
 Description: Plugin to promote users with no roles set (the orphans) to the role from other blog where they registered or to default if any found.
 
-Version: 1.1
+Version: 1.2
 
 Author: MELONIQ.NET
-Author URI: http://meloniq.net/
+Author URI: https://meloniq.net/
 Text Domain: wp-orphanage-extended
 Domain Path: /languages
 */
@@ -24,7 +24,7 @@ if ( ! function_exists( 'add_action' ) ) {
 /**
  * Plugin version and textdomain constants.
  */
-define( 'WPOEX_VERSION', '1.1' );
+define( 'WPOEX_VERSION', '1.2' );
 define( 'WPOEX_TD', 'wp-orphanage-extended' );
 
 
