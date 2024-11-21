@@ -3,8 +3,8 @@ Contributors: meloniq
 Donate link: https://blog.meloniq.net/donate/
 Tags: users, shared user table, CUSTOM_USER_TABLE, CUSTOM_USER_META_TABLE
 Requires at least: 4.9
-Tested up to: 6.2
-Stable tag: 1.2
+Tested up to: 6.7
+Stable tag: 1.3
 
 Plugin to promote users with no roles set (the orphans) to the role from other blog where they registered or to default if any found.
 
@@ -42,6 +42,10 @@ If you are using the ``CUSTOM_USER_TABLE`` and ``CUSTOM_USER_META_TABLE`` in you
 1. WP-Orphanage Extended Options Screen
 
 == Changelog ==
+
+= 1.3 =
+* Fixed security issue CSRF on settings page (reported by Wordfence)
+* Fixed loading textdomain too early
 
 = 1.2 =
 * Escaped data on settings page

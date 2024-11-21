@@ -4,7 +4,7 @@ Plugin Name: WP-Orphanage Extended
 Plugin URI: https://blog.meloniq.net/2012/01/29/wp-orphanage-extended/
 Description: Plugin to promote users with no roles set (the orphans) to the role from other blog where they registered or to default if any found.
 
-Version: 1.2
+Version: 1.3
 
 Author: MELONIQ.NET
 Author URI: https://meloniq.net/
@@ -24,7 +24,7 @@ if ( ! function_exists( 'add_action' ) ) {
 /**
  * Plugin version and textdomain constants.
  */
-define( 'WPOEX_VERSION', '1.2' );
+define( 'WPOEX_VERSION', '1.3' );
 define( 'WPOEX_TD', 'wp-orphanage-extended' );
 
 
@@ -32,12 +32,6 @@ define( 'WPOEX_TD', 'wp-orphanage-extended' );
  * Process actions on plugin activation.
  */
 register_activation_hook( plugin_basename( __FILE__ ), 'wporphanageex_activate' );
-
-
-/**
- * Load Text-Domain.
- */
-load_plugin_textdomain( WPOEX_TD, false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
 
 /**
@@ -95,7 +89,7 @@ function wporphanageex_menu_settings() {
  * @return void
  */
 function wporphanageex_adopt_this_orphan( $login ) {
-  $user = get_user_by( 'login', $login );
+	$user = get_user_by( 'login', $login );
 
 	if ( ! current_user_can( 'read' ) ) {
 		$user_up = new WP_User( $user->ID );
@@ -179,3 +173,13 @@ function wporphanageex_search_user_role( $user_id = false ) {
 	return $default;
 }
 
+
+/**
+ * Load plugin textdomain.
+ *
+ * @return void
+ */
+function wporphanageex_load_textdomain() {
+	load_plugin_textdomain( WPOEX_TD, false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+}
+add_action( 'init', 'wporphanageex_load_textdomain' );

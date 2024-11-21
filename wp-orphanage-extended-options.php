@@ -6,6 +6,9 @@
 
 	// Update options
 	if ( isset( $_POST['action'] ) && $_POST['action'] == 'update' ) {
+		// Check nonce
+		check_admin_referer( 'wporphanageex-settings' );
+
 		update_option( 'wporphanageex_role', $_POST['wporphanageex_role'] );
 		if ( isset( $_POST['wporphanageex_prefixes'] ) && is_array( $_POST['wporphanageex_prefixes'] ) ) {
 			$prefixes = array();
@@ -31,6 +34,7 @@ $prefixes = get_option( 'wporphanageex_prefixes' );
 
 	<form method="post" action="" id="wporphanageex-settings">
 		<input type="hidden" name="action" value="update" />
+		<?php wp_nonce_field( 'wporphanageex-settings' ); ?>
 
 		<table class="form-table">
 			<tr valign="top">
