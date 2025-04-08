@@ -2,7 +2,7 @@
 Contributors: meloniq
 Tags: users, shared user table, CUSTOM_USER_TABLE, CUSTOM_USER_META_TABLE
 Requires at least: 4.9
-Tested up to: 6.7
+Tested up to: 6.8
 Stable tag: 1.3
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
