@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<ruleset name="WP-Orphanage Extended">
+	<description>WP-Orphanage Extended rules for PHP_CodeSniffer</description>
+
+	<rule ref="WordPress">
+	</rule>
+</ruleset>
