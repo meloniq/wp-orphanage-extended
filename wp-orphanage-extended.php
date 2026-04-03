@@ -47,14 +47,14 @@ register_activation_hook( plugin_basename( __FILE__ ), 'wporphanageex_activate' 
 function wporphanageex_activate() {
 	global $wpdb;
 
-	// set default role if not exist
+	// set default role if not exist.
 	if ( ! get_option( 'wporphanageex_role' ) && get_option( 'default_role' ) ) {
 		update_option( 'wporphanageex_role', get_option( 'default_role' ) );
 	} else {
 		update_option( 'wporphanageex_role', 'subscriber' );
 	}
 
-	// set default prefix if not exist
+	// set default prefix if not exist.
 	$prefixes = array();
 	$prefixes[] = $wpdb->prefix;
 	if ( ! get_option( 'wporphanageex_prefixes' ) ) {
@@ -71,7 +71,7 @@ function wporphanageex_activate() {
  */
 function add_wporphanageex_options_page() {
 
-	add_options_page( __( 'WP Orphanage Extended', WPOEX_TD ), __( 'WP Orphanage Extended', WPOEX_TD ), 'administrator', 'wp-orphanage-extended', 'wporphanageex_menu_settings' );
+	add_options_page( __( 'WP Orphanage Extended', 'wp-orphanage-extended' ), __( 'WP Orphanage Extended', 'wp-orphanage-extended' ), 'administrator', 'wp-orphanage-extended', 'wporphanageex_menu_settings' );
 }
 add_action( 'admin_menu', 'add_wporphanageex_options_page' );
 
@@ -89,7 +89,7 @@ function wporphanageex_menu_settings() {
 /**
  * Adopts orphaned user.
  *
- * @param string $login
+ * @param string $login User login.
  *
  * @return void
  */
@@ -149,7 +149,7 @@ function wporphanageex_get_all_users() {
 /**
  * Searching other blogs and returns a user role, if not found, returns default one.
  *
- * @param int $user_id (optional)
+ * @param int $user_id User ID to search for. If not set, current user will be used.
  *
  * @return string
  */
@@ -173,7 +173,7 @@ function wporphanageex_search_user_role( $user_id = false ) {
 		}
 	}
 
-	// if no one was found, return default role
+	// if no one was found, return default role.
 	$default = get_option( 'wporphanageex_role' );
 	return $default;
 }
