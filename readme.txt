@@ -2,8 +2,8 @@
 Contributors: meloniq
 Tags: users, shared user table, CUSTOM_USER_TABLE, CUSTOM_USER_META_TABLE
 Requires at least: 4.9
-Tested up to: 6.8
-Stable tag: 1.3
+Tested up to: 6.9
+Stable tag: 1.4
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,9 +12,9 @@ Plugin to promote users with no roles set (the orphans) to the role from other b
 
 == Description ==
 
-Users who have not been assigned any Roles or Capabilities are called 'orphans'. 
-When using the [shared users table trick](https://web.archive.org/web/20160226091450/http://xentek.net/articles/528/implementing-the-wordpress-shared-users-table-trick/) to link up multiple WordPress installations, users who register on one of your blogs, are not given any privileges on the other blogs in the network. 
-WP-Orphanage is a plugin that automatically adopts your orphan users by promoting them to the role of your choosing. 
+Users who have not been assigned any Roles or Capabilities are called 'orphans'.
+When using the [shared users table trick](https://web.archive.org/web/20160226091450/http://xentek.net/articles/528/implementing-the-wordpress-shared-users-table-trick/) to link up multiple WordPress installations, users who register on one of your blogs, are not given any privileges on the other blogs in the network.
+WP-Orphanage is a plugin that automatically adopts your orphan users by promoting them to the role of your choosing.
 By default it is the same as the default role set in the WP Options.
 
 It does it in two ways:
@@ -45,6 +45,11 @@ If you are using the ``CUSTOM_USER_TABLE`` and ``CUSTOM_USER_META_TABLE`` in you
 
 == Changelog ==
 
+= 1.4 =
+* Changed textdomain to 'wp-orphanage-extended', stopped using constant WPOEX_TD
+* Removed translation files, as they are not needed anymore (handled by WordPress.org)
+* Fixed minor issues reported by PHPCS
+
 = 1.3 =
 * Fixed security issue CSRF on settings page (reported by Wordfence)
 * Fixed loading textdomain too early
@@ -56,7 +61,7 @@ If you are using the ``CUSTOM_USER_TABLE`` and ``CUSTOM_USER_META_TABLE`` in you
 * Changed textdomain to 'wp-orphanage-extended', represented by constant WPOEX_TD
 * Minor code styling corrections
 
-= 1.0 = 
+= 1.0 =
 * Initial release.
 
 This plugin is a extended version of WP-Orphanage plugin written by Eric Marden (xentek.net)

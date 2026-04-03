@@ -6,7 +6,9 @@
  * Description: Plugin to promote users with no roles set (the orphans) to the role from other blog where they registered or to default if any found.
  * Tags: orphanage, orphan, user, role
  *
- * Version: 1.3
+ * Requires at least: 4.9
+ * Requires PHP:      7.4
+ * Version: 1.4
  *
  * Author: MELONIQ.NET
  * Author URI: https://meloniq.net/
@@ -29,7 +31,7 @@ if ( ! function_exists( 'add_action' ) ) {
 /**
  * Plugin version and textdomain constants.
  */
-define( 'WPOEX_VERSION', '1.3' );
+define( 'WPOEX_VERSION', '1.4' );
 define( 'WPOEX_TD', 'wp-orphanage-extended' );
 
 
