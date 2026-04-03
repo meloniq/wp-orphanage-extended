@@ -55,12 +55,11 @@ function wporphanageex_activate() {
 	}
 
 	// set default prefix if not exist.
-	$prefixes = array();
+	$prefixes   = array();
 	$prefixes[] = $wpdb->prefix;
 	if ( ! get_option( 'wporphanageex_prefixes' ) ) {
 		update_option( 'wporphanageex_prefixes', $prefixes );
 	}
-
 }
 
 
@@ -71,7 +70,7 @@ function wporphanageex_activate() {
  */
 function add_wporphanageex_options_page() {
 
-	add_options_page( __( 'WP Orphanage Extended', 'wp-orphanage-extended' ), __( 'WP Orphanage Extended', 'wp-orphanage-extended' ), 'administrator', 'wp-orphanage-extended', 'wporphanageex_menu_settings' );
+	add_options_page( __( 'WP Orphanage Extended', 'wp-orphanage-extended' ), __( 'WP Orphanage Extended', 'wp-orphanage-extended' ), 'manage_options', 'wp-orphanage-extended', 'wporphanageex_menu_settings' );
 }
 add_action( 'admin_menu', 'add_wporphanageex_options_page' );
 
@@ -82,7 +81,7 @@ add_action( 'admin_menu', 'add_wporphanageex_options_page' );
  * @return void
  */
 function wporphanageex_menu_settings() {
-	include_once( dirname( __FILE__ ) . '/wp-orphanage-extended-options.php' );
+	include_once __DIR__ . '/wp-orphanage-extended-options.php';
 }
 
 
@@ -101,7 +100,7 @@ function wporphanageex_adopt_this_orphan( $login ) {
 		$user_up->set_role( wporphanageex_search_user_role( $user->ID ) );
 	}
 }
-add_action( 'wp_login', 'wporphanageex_adopt_this_orphan' ); 
+add_action( 'wp_login', 'wporphanageex_adopt_this_orphan' );
 
 
 /**
@@ -129,6 +128,7 @@ function wporphanageex_get_roles() {
 	global $wpdb;
 
 	$option = $wpdb->prefix . 'user_roles';
+
 	return get_option( $option );
 }
 
@@ -141,7 +141,8 @@ function wporphanageex_get_roles() {
 function wporphanageex_get_all_users() {
 	global $wpdb;
 
-	$results = $wpdb->get_col( "SELECT ID FROM $wpdb->users" );
+	$results = $wpdb->get_col( "SELECT ID FROM $wpdb->users" ); // phpcs:ignore
+
 	return $results;
 }
 
@@ -154,18 +155,17 @@ function wporphanageex_get_all_users() {
  * @return string
  */
 function wporphanageex_search_user_role( $user_id = false ) {
-	global $wpdb, $current_user;
+	global $wpdb;
 
-	$current_user = wp_get_current_user();
 	if ( ! $user_id ) {
-		$user_id = $current_user->ID;
+		$user_id = wp_get_current_user_id();
 	}
 
 	$prefixes = get_option( 'wporphanageex_prefixes' );
 	if ( $prefixes && is_array( $prefixes ) ) {
 		foreach ( $prefixes as $prefix ) {
 			$role = get_user_meta( $user_id, $prefix . 'capabilities', true );
-			if ( $role != '' && is_array( $role ) ) {
+			if ( '' !== $role && is_array( $role ) ) {
 				foreach ( $role as $key => $value ) {
 					return $key;
 				}
