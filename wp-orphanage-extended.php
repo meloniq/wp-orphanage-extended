@@ -17,16 +17,16 @@
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.html
  *
  * Text Domain: wp-orphanage-extended
+ *
+ * @package WPOrphanage\Extended
  */
 
+namespace WPOrphanage\Extended;
 
-/**
- * Avoid calling file directly.
- */
-if ( ! function_exists( 'add_action' ) ) {
-	die( 'Whoops! You shouldn\'t be doing that.' );
+// If this file is accessed directly, then abort.
+if ( ! defined( 'WPINC' ) ) {
+	die;
 }
-
 
 /**
  * Plugin version and textdomain constants.
@@ -36,24 +36,37 @@ define( 'WPOEX_TD', 'wp-orphanage-extended' );
 
 
 /**
- * Process actions on plugin activation.
+ * Setup.
+ *
+ * @return void
  */
-register_activation_hook( plugin_basename( __FILE__ ), 'wporphanageex_activate' );
+function init() {
+	global $wporphanageex;
 
+	require_once __DIR__ . '/src/class-utils.php';
+	require_once __DIR__ . '/src/class-admin-page.php';
+	require_once __DIR__ . '/src/class-core.php';
+
+	$wporphanageex['admin-page'] = new Admin_Page();
+	$wporphanageex['core']       = new Core();
+}
+add_action( 'plugins_loaded', __NAMESPACE__ . '\init' );
 
 /**
  * Action on plugin activate.
  *
  * @return void
  */
-function wporphanageex_activate() {
+function activate() {
 	global $wpdb;
 
 	// set default role if not exist.
-	if ( ! get_option( 'wporphanageex_role' ) && get_option( 'default_role' ) ) {
-		update_option( 'wporphanageex_role', get_option( 'default_role' ) );
-	} else {
-		update_option( 'wporphanageex_role', 'subscriber' );
+	if ( ! get_option( 'wporphanageex_role' ) ) {
+		if ( get_option( 'default_role' ) ) {
+			update_option( 'wporphanageex_role', get_option( 'default_role' ) );
+		} else {
+			update_option( 'wporphanageex_role', 'subscriber' );
+		}
 	}
 
 	// set default prefix if not exist.
@@ -63,119 +76,4 @@ function wporphanageex_activate() {
 		update_option( 'wporphanageex_prefixes', $prefixes );
 	}
 }
-
-
-/**
- * Populate administration menu of the plugin.
- *
- * @return void
- */
-function add_wporphanageex_options_page() {
-
-	add_options_page( __( 'WP Orphanage Extended', 'wp-orphanage-extended' ), __( 'WP Orphanage Extended', 'wp-orphanage-extended' ), 'manage_options', 'wp-orphanage-extended', 'wporphanageex_menu_settings' );
-}
-add_action( 'admin_menu', 'add_wporphanageex_options_page' );
-
-
-/**
- * Create settings page in admin.
- *
- * @return void
- */
-function wporphanageex_menu_settings() {
-	include_once __DIR__ . '/wp-orphanage-extended-options.php';
-}
-
-
-/**
- * Adopts orphaned user.
- *
- * @param string $login User login.
- *
- * @return void
- */
-function wporphanageex_adopt_this_orphan( $login ) {
-	$user = get_user_by( 'login', $login );
-
-	if ( ! current_user_can( 'read' ) ) {
-		$user_up = new WP_User( $user->ID );
-		$user_up->set_role( wporphanageex_search_user_role( $user->ID ) );
-	}
-}
-add_action( 'wp_login', 'wporphanageex_adopt_this_orphan' );
-
-
-/**
- * Adopts all orphaned users.
- *
- * @return void
- */
-function wporphanageex_adopt_all_orphans() {
-	foreach ( wporphanageex_get_all_users() as $user_id ) {
-		$user = new WP_User( $user_id );
-		if ( ! user_can( $user_id, 'read' ) ) {
-			$user->set_role( wporphanageex_search_user_role( $user_id ) );
-		}
-	}
-}
-add_action( 'load-users.php', 'wporphanageex_adopt_all_orphans' );
-
-
-/**
- * Returns an array of user roles.
- *
- * @return array
- */
-function wporphanageex_get_roles() {
-	global $wpdb;
-
-	$option = $wpdb->prefix . 'user_roles';
-
-	return get_option( $option );
-}
-
-
-/**
- * Returns an array of user IDs.
- *
- * @return array
- */
-function wporphanageex_get_all_users() {
-	global $wpdb;
-
-	$results = $wpdb->get_col( "SELECT ID FROM $wpdb->users" ); // phpcs:ignore
-
-	return $results;
-}
-
-
-/**
- * Searching other blogs and returns a user role, if not found, returns default one.
- *
- * @param int $user_id User ID to search for. If not set, current user will be used.
- *
- * @return string
- */
-function wporphanageex_search_user_role( $user_id = false ) {
-	global $wpdb;
-
-	if ( ! $user_id ) {
-		$user_id = wp_get_current_user_id();
-	}
-
-	$prefixes = get_option( 'wporphanageex_prefixes' );
-	if ( $prefixes && is_array( $prefixes ) ) {
-		foreach ( $prefixes as $prefix ) {
-			$role = get_user_meta( $user_id, $prefix . 'capabilities', true );
-			if ( '' !== $role && is_array( $role ) ) {
-				foreach ( $role as $key => $value ) {
-					return $key;
-				}
-			}
-		}
-	}
-
-	// if no one was found, return default role.
-	$default = get_option( 'wporphanageex_role' );
-	return $default;
-}
+register_activation_hook( __FILE__, __NAMESPACE__ . '\activate' );

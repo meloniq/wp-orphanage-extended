@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-Orphanage Extended\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/plugins/wp-orphanage-extended/\n"
-"POT-Creation-Date: 2026-04-03 22:57+0200\n"
+"POT-Creation-Date: 2026-04-05 20:04+0200\n"
 "PO-Revision-Date: 2012-MO-DA HO:MI+ZONE\n"
 "Last-Translator: MELONIQ.NET\n"
 "Language-Team: MELONIQ.NET\n"
@@ -20,42 +20,63 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: wp-orphanage-extended-options.php:3
-msgid "You do not have sufficient permissions to access this page."
-msgstr ""
-
-#: wp-orphanage-extended-options.php:24
-msgid "Settings saved"
-msgstr ""
-
-#: wp-orphanage-extended-options.php:33 wp-orphanage-extended.php:69
+#: src/class-admin-page.php:38 src/class-admin-page.php:39
+#: src/class-admin-page.php:57
 msgid "WP Orphanage Extended"
 msgstr ""
 
-#: wp-orphanage-extended-options.php:41
+#: src/class-admin-page.php:65
 msgid "Choose Default Role:"
 msgstr ""
 
-#: wp-orphanage-extended-options.php:50
+#: src/class-admin-page.php:74
 msgid "Choose the default role orphan users should be promoted to (if no role to copy from other table was found)."
 msgstr ""
 
-#: wp-orphanage-extended-options.php:54
+#: src/class-admin-page.php:78
 msgid "Add WP Prefixes:"
 msgstr ""
 
-#: wp-orphanage-extended-options.php:59
+#: src/class-admin-page.php:83
 msgid "Prefix"
 msgstr ""
 
-#: wp-orphanage-extended-options.php:63
+#: src/class-admin-page.php:87
 msgid "Add new:"
 msgstr ""
 
-#: wp-orphanage-extended-options.php:64
+#: src/class-admin-page.php:88
 msgid "Add prefixes of all WP installs where to search for user role. To remove field, leave it empty. Default WP prefix is <code>wp_</code> "
 msgstr ""
 
-#: wp-orphanage-extended-options.php:70
+#: src/class-admin-page.php:94
 msgid "Save Changes"
+msgstr ""
+
+#: src/class-admin-page.php:110
+msgid "Security check failed."
+msgstr ""
+
+#: src/class-admin-page.php:115
+msgid "You do not have permission to perform this action."
+msgstr ""
+
+#: src/class-admin-page.php:165
+msgid "Please fill in all required fields."
+msgstr ""
+
+#: src/class-admin-page.php:166
+msgid "Invalid prefixes value."
+msgstr ""
+
+#: src/class-admin-page.php:167
+msgid "An error occurred."
+msgstr ""
+
+#: src/class-admin-page.php:184
+msgid "Settings saved"
+msgstr ""
+
+#: src/class-admin-page.php:185
+msgid "Action completed"
 msgstr ""
