@@ -92,7 +92,8 @@ class Admin_Page {
 								<?php endforeach; ?>
 							<?php endif; ?>
 							<br /><?php esc_html_e( 'Add new:', 'wp-orphanage-extended' ); ?> <input name="wporphanageex_prefixes[]" id="wporphanageex_prefixes" class="regular-text" type="text" value="" /><br />
-							<small><?php esc_html_e( 'Add prefixes of all WP installs where to search for user role. To remove field, leave it empty. Default WP prefix is <code>wp_</code> ', 'wp-orphanage-extended' ); ?></small>
+							<small><?php esc_html_e( 'Add prefixes of all WP installs where to search for user role. To remove field, leave it empty.', 'wp-orphanage-extended' ); ?></small>
+							<small><?php esc_html_e( 'Default WP prefix is:', 'wp-orphanage-extended' ); ?> <code>wp_</code> </small>
 						</td>
 					</tr>
 				</table>
