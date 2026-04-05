@@ -49,6 +49,7 @@ If you are using the ``CUSTOM_USER_TABLE`` and ``CUSTOM_USER_META_TABLE`` in you
 * Changed textdomain to 'wp-orphanage-extended', stopped using constant WPOEX_TD
 * Removed translation files, as they are not needed anymore (handled by WordPress.org)
 * Fixed minor issues reported by PHPCS
+* Code refactoring
 
 = 1.3 =
 * Fixed security issue CSRF on settings page (reported by Wordfence)
